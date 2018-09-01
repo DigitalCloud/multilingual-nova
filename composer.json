@@ -1,6 +1,6 @@
 {
     "name": "digitalcloud/multilingual-nova",
-    "description": "A Laravel Nova field.",
+    "description": "💪 Multilingual Nova (using default nova fields)",
     "keywords": [
         "laravel",
         "nova"
