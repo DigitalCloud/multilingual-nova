@@ -36,3 +36,4 @@ Note that "Translations" is not a database column like Most of Nova Fields, it's
 * [ ] List the supported locale using Config file
 * [ ] Manage the supported locale using Database resource
 * [ ] Autodetect translatable Models
+* [ ] Better support for untranslatable fields 
