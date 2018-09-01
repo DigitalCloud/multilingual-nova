@@ -4,7 +4,7 @@ This field allow you to support multilingual index/forms/deatils CRUD using [Lar
 
 ### Screenshots
 
-TBD
+![Index languages buttons](https://www.imageupload.co.uk/images/2018/09/01/ScreenShot2018-09-01at7.48.49PM.png)
 
 ### Install
 
