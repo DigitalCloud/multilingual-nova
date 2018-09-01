@@ -1,4 +1,4 @@
-# Multilingual Nova
+# Multilingual Nova (using default nova fields)
 
 This field allow you to support multilingual index/forms/deatils CRUD using [Laravel Nova](https://nova.laravel.com) and [Spatie Translatable](https://github.com/spatie/laravel-translatable).
 
