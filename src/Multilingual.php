@@ -30,21 +30,17 @@ class Multilingual extends Field
     protected function resolveAttribute($resource, $attribute)
     {
         $locales = $this->getLocales();
-
+        $result = [];
+        foreach ($locales as $key => $locale) {
+            $result[] = [
+                'label' => $locale,
+                'value' => $key,
+                'translated' => in_array($key, array_keys($resource->getTranslations($resource->translatable[0])))
+            ];
+        }
         return [
             'id' => $resource->id,
-            'locales' => [
-                [
-                    'label' => 'EN',
-                    'value' => 'en',
-                    'translated' => true,
-                ],
-                [
-                    'label' => 'AR',
-                    'value' => 'ar',
-                    'translated' => false,
-                ]
-            ]
+            'locales' => $result
         ];
     }
 
