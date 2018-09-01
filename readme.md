@@ -54,11 +54,13 @@ Multilingual::make('Description')->setLocales([
 * Quick switch between languages in the details view
 * Support Relations fields and sub tables
 * Autofill form fields with default/fallback language content
+* Display translated/untranslated status for each locale
+* List the supported locale using Config file
 
 ### Roadmap
 
-* [*] Display translated/untranslated status for each locale
-* [*] List the supported locale using Config file
+* [x] Display translated/untranslated status for each locale
+* [x] List the supported locale using Config file
 * [ ] Manage the supported locale using Database resource
 * [ ] Autodetect translatable Models
 * [ ] Better support for untranslatable fields 
