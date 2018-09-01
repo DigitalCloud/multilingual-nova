@@ -19,7 +19,7 @@ use Digitalcloud\MultilingualNova\Multilingual;
 Multilingual::make('translations'),
 ```
 
-Note that "Translations" is not a database column like Most of Nova Fields, it's just a Label.
+Note that "Translations" is not a database column like Most of Nova Fields, it's just a Label. the field will only appear in index and details pages, no forms feilds will be added.
 
 ### Features
 
