@@ -20,9 +20,14 @@ class FieldServiceProvider extends ServiceProvider
         if ($lang) app()->setLocale($lang);
 
         Nova::serving(function (ServingNova $event) {
-            Nova::script('multilingual-nova', __DIR__.'/../dist/js/field.js');
-            Nova::style('multilingual-nova', __DIR__.'/../dist/css/field.css');
+            Nova::script('multilingual-nova', __DIR__ . '/../dist/js/field.js');
+            Nova::style('multilingual-nova', __DIR__ . '/../dist/css/field.css');
         });
+
+        // Publish a config file
+        $this->publishes([
+            __DIR__ . '/../config/multilingual.php' => config_path('multilingual.php'),
+        ], 'multilingual-nova');
     }
 
     /**

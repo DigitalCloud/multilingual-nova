@@ -22,9 +22,10 @@ class Multilingual extends Field
 
         $locales = array_map(function ($value) {
             return __($value);
-        }, config('translatable.locales'));
+        }, $this->getSupportLocales());
 
         $this->setLocales($locales);
+
     }
 
     protected function resolveAttribute($resource, $attribute)
@@ -38,6 +39,7 @@ class Multilingual extends Field
                 'translated' => in_array($key, array_keys($resource->getTranslations($resource->translatable[0])))
             ];
         }
+
         return [
             'id' => $resource->id,
             'locales' => $result
@@ -52,5 +54,23 @@ class Multilingual extends Field
     public function getLocales()
     {
         return $this->meta()["locales"];
+    }
+
+    private function getSupportLocales()
+    {
+        if (config('multilingual.source') == 'array') return config('multilingual.locales');
+
+        if (config('multilingual.source') == 'database') {
+            $model = config('multilingual.database.model');
+            $code = config('multilingual.database.code_field');
+            $label = config('multilingual.database.label_field');
+
+            $locales = ($model)::all()->mapWithKeys(function ($item) use ($code, $label) {
+                return [$item->$code => $item->$label];
+            });
+            return $locales->toArray();
+        }
+
+        return ['en' => 'EN'];
     }
 }
