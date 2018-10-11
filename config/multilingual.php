@@ -4,7 +4,7 @@ return [
 
     /*
      * The source of supported locales on the application
-     * Available selection "array", "database"
+     * Available selection "array", "database". Default array
      */
     'source' => 'array',
 
@@ -24,5 +24,16 @@ return [
         'model' => 'App\\Language',
         'code_field' => 'code',
         'label_field' => 'label'
-    ]
+    ],
+
+    /*
+     * The view style you want to show on index & details page
+     * Available selection "button", "list", "mix" default button
+     */
+    'style' => 'button',
+
+    /*
+     * If you choose mix selection, you can define after how many languages should button convert to list
+     */
+    'convert_to_list_after' => 3
 ];

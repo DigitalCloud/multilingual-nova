@@ -42,7 +42,9 @@ class Multilingual extends Field
 
         return [
             'id' => $resource->id,
-            'locales' => $result
+            'locales' => $result,
+            'style' => config('multilingual.style'),
+            'convert_to_list_after' => config('multilingual.convert_to_list_after'),
         ];
     }
 
