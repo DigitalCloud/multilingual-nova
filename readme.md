@@ -4,7 +4,7 @@ This field allow you to support multilingual index/forms/deatils CRUD using [Lar
 
 ### Screenshots
 
-![Index languages buttons](https://raw.githubusercontent.com/DigitalCloud/multilingual-nova/master/dist/sample.png)
+![Index languages buttons](dist/sample.png)
 
 ### Install
 
