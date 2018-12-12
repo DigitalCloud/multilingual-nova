@@ -36,7 +36,7 @@ class Multilingual extends Field
             $result[] = [
                 'label' => $locale,
                 'value' => $key,
-                'translated' => in_array($key, array_keys($resource->getTranslations($resource->translatable[0])))
+                'translated' => in_array($key, array_keys($resource->getTranslations($resource->getTranslatableAttributes()[0])))
             ];
         }
 
