@@ -33,7 +33,7 @@ class FieldServiceProvider extends ServiceProvider
         // Publish a config file
         $this->publishes([
             __DIR__ . '/../config/multilingual.php' => config_path('multilingual.php'),
-        ], 'multilingual-nova');
+        ], 'config');
 
         $this->app->booted(function () {
             $this->routes();
@@ -48,6 +48,7 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/multilingual.php', 'multilingual');
     }
 
     protected function routes()
