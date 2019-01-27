@@ -166,8 +166,10 @@ less than three locales, then they will display as `button` otherwise `list` wil
 * [ ] Better support for untranslatable fields 
 
 ### Screenshots
-
+##### Index page
 ![Index languages buttons](dist/sample.png)
+##### Create/Update page
 ![mmmm](https://user-images.githubusercontent.com/41853913/51800821-ff1dc000-223d-11e9-827b-c52c037fcce8.PNG)
+##### Language Tool
 ![multiligual tool](https://user-images.githubusercontent.com/41853913/51800147-e90b0200-2233-11e9-80b5-8074ea5354bd.PNG)
 
