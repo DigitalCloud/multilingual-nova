@@ -13,6 +13,16 @@ Nova.booting((Vue, router) => {
     Vue.component('detail-multilingual-nova', require('./components/DetailField'));
     Vue.component('form-multilingual-nova', require('./components/FormField'));
 
+    Vue.component('language-selector', require('./components/LanguageSelector'));
+
+    router.addRoutes([
+        {
+            name: 'nova-language-tool',
+            path: '/nova-language-tool',
+            component: require('./components/Tool'),
+        },
+    ])
+
     let lang = getParameterByName('lang');
     if (lang) {
         Nova.request().defaults.headers['lang'] = lang;

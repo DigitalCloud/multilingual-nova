@@ -3,6 +3,7 @@
 namespace Digitalcloud\MultilingualNova;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Multilingual extends Field
 {
@@ -12,9 +13,6 @@ class Multilingual extends Field
      * @var string
      */
     public $component = 'multilingual-nova';
-
-    public $showOnCreation = false;
-    public $showOnUpdate = false;
 
     public function __construct($name, $attribute = null, $resolveCallback = null)
     {
@@ -26,6 +24,11 @@ class Multilingual extends Field
 
         $this->setLocales($locales);
 
+    }
+
+    public function fill(NovaRequest $request, $model)
+    {
+        return ;
     }
 
     protected function resolveAttribute($resource, $attribute)
