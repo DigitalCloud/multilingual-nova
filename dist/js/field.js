@@ -10902,7 +10902,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['field']
+    props: ['field'],
+
+    data: function data() {
+        return {
+            selectedLocale: window.config.currentLocal
+        };
+    }
 });
 
 /***/ }),
@@ -10949,7 +10955,7 @@ var render = function() {
     this.field.value.style == "list" ||
     (this.field.value.style == "mix" &&
       this.field.value.locales.length > this.field.value.convert_to_list_after)
-      ? _c("div", { staticClass: "w-1/2" }, [
+      ? _c("div", {}, [
           _c(
             "select",
             {
@@ -11219,6 +11225,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11236,6 +11259,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         changeLocal: function changeLocal() {
+            window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
+        },
+        localClicked: function localClicked(local) {
+            this.currentLocal = local;
             window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
         },
 
@@ -11272,6 +11299,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             url = url.replace(/[?#]$/, '');
             return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
         }
+    },
+
+    created: function created() {
+        if (this.field.value.locales.length > 0) {
+            this.locals = this.field.value.locales;
+        }
+    },
+
+    mounted: function mounted() {
+        if (this.field.value.style == 'list' || this.field.value.style == 'mix' && this.field.value.locales.length > this.field.value.convert_to_list_after) {
+            var locales = this.field.value.locales;
+            locales.map(function (item) {
+                if (item.translated) item.label += " -translated";
+                return item;
+            });
+            Object.assign(this.field, { "options": this.field.value.locales });
+        }
     }
 });
 
@@ -11288,50 +11332,82 @@ var render = function() {
     { attrs: { field: _vm.field } },
     [
       _c("template", { slot: "field" }, [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.currentLocal,
-                expression: "currentLocal"
-              }
-            ],
-            staticClass: "w-full form-control form-select",
-            class: _vm.errorClasses,
-            attrs: { id: _vm.field.name, placeholder: _vm.field.name },
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.currentLocal = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                },
-                _vm.changeLocal
-              ]
-            }
-          },
-          _vm._l(_vm.locals, function(value, key) {
-            return _c("option", { domProps: { value: key } }, [
-              _vm._v(_vm._s(value))
-            ])
-          }),
-          0
-        ),
+        this.field.value.style == "button" ||
+        (this.field.value.style == "mix" &&
+          _vm.locals.length <= this.field.value.convert_to_list_after)
+          ? _c(
+              "div",
+              _vm._l(_vm.locals, function(local) {
+                return _c(
+                  "a",
+                  {
+                    class:
+                      "btn btn-lang btn-default " +
+                      (local.translated ? "btn-primary" : "btn-secondary"),
+                    attrs: {
+                      title:
+                        (local.translated ? "Translated" : "Untranslated") +
+                        " Language",
+                      href: "#"
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.localClicked(local.value)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(local.label))]
+                )
+              }),
+              0
+            )
+          : _vm._e(),
         _vm._v(" "),
-        _vm.hasError
-          ? _c("p", { staticClass: "my-2 text-danger" }, [
-              _vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")
+        this.field.value.style == "list" ||
+        (this.field.value.style == "mix" &&
+          _vm.locals.length > this.field.value.convert_to_list_after)
+          ? _c("div", [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currentLocal,
+                      expression: "currentLocal"
+                    }
+                  ],
+                  staticClass: "w-full form-control form-select",
+                  class: _vm.errorClasses,
+                  attrs: { id: _vm.field.name, placeholder: _vm.field.name },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.currentLocal = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.changeLocal
+                    ]
+                  }
+                },
+                _vm._l(_vm.locals, function(local) {
+                  return _c("option", { domProps: { value: local.value } }, [
+                    _vm._v(_vm._s(local.label))
+                  ])
+                }),
+                0
+              )
             ])
           : _vm._e()
       ])

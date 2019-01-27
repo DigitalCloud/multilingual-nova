@@ -7,7 +7,7 @@
                href="#" @click.prevent="$emit('change', locale.value)">{{locale.label}}</a>
         </div>
 
-        <div class="w-1/2"
+        <div class=""
              v-if="this.field.value.style=='list' || (this.field.value.style=='mix' && this.field.value.locales.length > this.field.value.convert_to_list_after)">
             <select v-model="selectedLocale" :id="field.name" class="w-full form-control form-select"
                     :class="errorClasses"
@@ -23,6 +23,12 @@
 
 <script>
     export default {
-        props: ['field']
+        props: ['field'],
+
+        data: function () {
+            return {
+                selectedLocale: window.config.currentLocal,
+            }
+        },
     }
 </script>
