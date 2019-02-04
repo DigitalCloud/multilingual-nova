@@ -5,10 +5,10 @@
         <card class="flex  p-3">
             <div class="flex border-b border-40 w-full" >
                 <div class="w-1/4 py-6 px-8">
-                    <label class="inline-block text-80 pt-2 leading-tight" for="language">Select Language</label>
+                    <label class="inline-block text-80 pt-2 leading-tight" for="language">{{__('Select Language')}}</label>
                 </div>
                 <div class="py-6 px-8 w-1/2">
-                    <select v-model="currentLocal" id="language"  dusk="language"  placeholder="Select Language" class="w-full form-control form-select">
+                    <select v-model="currentLocal" id="language"  dusk="language"  :placeholder="__('Select Language')" class="w-full form-control form-select">
                         <option v-for="(value, key) in locals" :value="key">
                             {{ value }}
                         </option>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="py-6 px-2 w-1/4">
                     <button type="button" class="btn btn-default btn-primary inline-flex items-center relative ml-auto mr-3" dusk="change-language-button" @click="changeLocal">
-                        <span class="">Change Language</span>
+                        <span class="">{{__('Change Language')}}</span>
                     </button>
                 </div>
             </div>

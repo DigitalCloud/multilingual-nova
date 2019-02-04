@@ -12698,7 +12698,7 @@ var render = function() {
                 staticClass: "inline-block text-80 pt-2 leading-tight",
                 attrs: { for: "language" }
               },
-              [_vm._v("Select Language")]
+              [_vm._v(_vm._s(_vm.__("Select Language")))]
             )
           ]),
           _vm._v(" "),
@@ -12718,7 +12718,7 @@ var render = function() {
                 attrs: {
                   id: "language",
                   dusk: "language",
-                  placeholder: "Select Language"
+                  placeholder: _vm.__("Select Language")
                 },
                 on: {
                   change: function($event) {
@@ -12760,7 +12760,7 @@ var render = function() {
                 attrs: { type: "button", dusk: "change-language-button" },
                 on: { click: _vm.changeLocal }
               },
-              [_c("span", {}, [_vm._v("Change Language")])]
+              [_c("span", {}, [_vm._v(_vm._s(_vm.__("Change Language")))])]
             )
           ])
         ])
