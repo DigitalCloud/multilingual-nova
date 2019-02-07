@@ -573,8 +573,8 @@ body {
       position: relative; } }
 
 .footer {
-  background-color: #ceebf2;
-  padding: 6em 0;
+  background-color: #f2f2f2;
+  padding: 1em 0;
   text-align: center; }
 
 .footer_content {
@@ -823,8 +823,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     margin-right: 0; }
 
 .header {
-  height: 30vh;
-  min-height: 10em;
+  height: 20vh;
   position: relative; }
   @media (max-width: 900px) {
     .header {
@@ -1651,7 +1650,7 @@ sup {
   text-transform: none; }
 
 .header_background {
-  background-color: #d4cab4; }
+  background-color: #d2f1f6; }
 
 .header_caption_title,
 .header_caption_slogan {
