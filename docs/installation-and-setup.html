@@ -63,8 +63,70 @@
         </div>
 
         <div class="grid_col -width-2/3">
-            <h1>Nova Language Tool</h1>
-            <p>This package allow you switch Nova language. Languages could be retrieved as array from config file or from database.
+            <p>
+
+                You can install the package via composer:
+                <br>
+                <br>
+                <code>
+                composer require digitalcloud/multilingual-nova
+                </code>
+
+                <br>
+                <br>
+                You can publish the config file:
+
+                <br>
+                <br>
+                <code>
+                php artisan vendor:publish --provider="Digitalcloud\MultilingualNova\FieldServiceProvider" --tag=config
+                </code>
+<br>
+<br>
+                This is the contents of the file which will be published at `config/multilingual.php`
+                <pre>
+                <code>
+return [
+
+    /*
+     * The source of supported locales on the application
+     * Available selection "array", "database". Default array
+     */
+    'source' => 'array',
+
+    /*
+    * If you choose array selection, you should add all supported translation on it as "code" => "label"
+    */
+    'locales' => [
+    'en' => 'English',
+    'ar' => 'Arabic',
+    'de' => 'Deutsch'
+    ],
+
+    /*
+    * If you choose database selection, you should choose the model responsible for retrieving supported translations
+    * And choose the 'code_field' for example "en","ar","ru"...
+    * And choose the 'label_field' which will be show for users, for example "English","EN", ....
+    */
+    'database' => [
+    'model' => 'App\\Language',
+    'code_field' => 'code',
+    'label_field' => 'label'
+    ],
+
+    /*
+    * The view style you want to show on index & details page
+    * Available selection "button", "list", "mix" default button
+    */
+    'style' => 'button',
+
+    /*
+    * If you choose mix selection, you can define after how many languages should button convert to list
+    */
+    'convert_to_list_after' => 3
+];
+                </code>
+            </pre>
             </p>
         </div>
     </div>
