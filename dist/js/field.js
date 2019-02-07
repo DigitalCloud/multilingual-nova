@@ -11343,7 +11343,9 @@ var render = function() {
                   {
                     class:
                       "btn btn-lang btn-default " +
-                      (local.translated ? "btn-primary" : "btn-secondary"),
+                      (local.value == _vm.currentLocal
+                        ? "btn-primary"
+                        : "btn-secondary"),
                     attrs: {
                       title:
                         (local.translated ? "Translated" : "Untranslated") +
