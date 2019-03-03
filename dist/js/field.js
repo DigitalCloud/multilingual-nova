@@ -10855,8 +10855,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         redirect: function redirect(locale) {
-            console.log(locale);
-            window.location = Nova.config.base + "/resources/" + this.resourceName + "/" + this.field.value.id + "/edit" + "?lang=" + locale;
+            window.location = this.replaceUrlParam(window.location.href, 'lang', this.locale);
+            // console.log(locale);
+            // window.location = Nova.config.base
+            //     + "/resources/"
+            //     + this.resourceName + "/"
+            //     + this.field.value.id + "/edit"
+            //     + "?lang=" + locale;
+        },
+        replaceUrlParam: function replaceUrlParam(url, paramName, paramValue) {
+            if (paramValue == null) {
+                paramValue = '';
+            }
+            var pattern = new RegExp('\\b(' + paramName + '=).*?(&|#|$)');
+            if (url.search(pattern) >= 0) {
+                return url.replace(pattern, '$1' + paramValue + '$2');
+            }
+            url = url.replace(/[?#]$/, '');
+            return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
         }
     },
     mounted: function mounted() {
@@ -11343,9 +11359,7 @@ var render = function() {
                   {
                     class:
                       "btn btn-lang btn-default " +
-                      (local.value == _vm.currentLocal
-                        ? "btn-primary"
-                        : "btn-secondary"),
+                      (local.translated ? "btn-primary" : "btn-secondary"),
                     attrs: {
                       title:
                         (local.translated ? "Translated" : "Untranslated") +
