@@ -3435,6 +3435,15 @@ exports.default = {
     handleChange: function handleChange(value) {
       this.value = value;
     }
+  },
+
+  computed: {
+    /**
+     * Determine if the field is in readonly mode
+     */
+    isReadonly: function isReadonly() {
+      return this.field.readonly || _.get(this.field, 'extraAttributes.readonly');
+    }
   }
 };
 
@@ -10957,7 +10966,7 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.$emit("change", locale.value)
+                    return _vm.$emit("change", locale.value)
                   }
                 }
               },
@@ -11002,7 +11011,7 @@ var render = function() {
                       : $$selectedVal[0]
                   },
                   function($event) {
-                    _vm.$emit("change", _vm.selectedLocale)
+                    return _vm.$emit("change", _vm.selectedLocale)
                   }
                 ]
               }
@@ -11369,7 +11378,7 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        _vm.localClicked(local.value)
+                        return _vm.localClicked(local.value)
                       }
                     }
                   },
@@ -11503,7 +11512,7 @@ var content = __webpack_require__(21);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("9ca8d456", content, false, {});
+var update = __webpack_require__(4)("1f52da28", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -12561,7 +12570,7 @@ var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("290c3e45", content, false, {});
+var update = __webpack_require__(4)("6e5db1d0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -12585,7 +12594,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -12646,10 +12655,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     methods: {
         changeLocal: function changeLocal() {
-            window.location = Nova.config.base + "/nova-language-tool?lang=" + this.currentLocal;
+            var _this = this;
+
+            var fd = new FormData();
+            fd.append('lang', this.currentLocal);
+            axios.post('/nova-vendor/multilingual-nova/current-local', fd).then(function (_ref) {
+                var data = _ref.data;
+
+                console.log(data);
+                // TODO display a successful message
+                window.location = Nova.config.base + "/nova-language-tool?lang=" + _this.currentLocal;
+            }).catch(function (error) {
+                //TODO display an error message
+                console.log(error);
+            });
         },
         initializeComponent: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -12670,19 +12692,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }));
 
             function initializeComponent() {
-                return _ref.apply(this, arguments);
+                return _ref2.apply(this, arguments);
             }
 
             return initializeComponent;
         }(),
         getCurrentLocal: function getCurrentLocal() {
-            var _this = this;
+            var _this2 = this;
 
-            return Object(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Minimum"])(Nova.request().get('/nova-vendor/multilingual-nova/current-local')).then(function (_ref2) {
-                var data = _ref2.data;
+            return Object(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Minimum"])(Nova.request().get('/nova-vendor/multilingual-nova/current-local')).then(function (_ref3) {
+                var data = _ref3.data;
 
-                _this.currentLocal = data;
-                _this.loading = false;
+                _this2.currentLocal = data;
+                _this2.loading = false;
             }).catch(function (error) {});
         }
     },
