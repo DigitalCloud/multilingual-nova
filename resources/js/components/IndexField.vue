@@ -14,12 +14,6 @@
         methods: {
             redirect(locale) {
                 window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
-                // console.log(locale);
-                // window.location = Nova.config.base
-                //     + "/resources/"
-                //     + this.resourceName + "/"
-                //     + this.field.value.id + "/edit"
-                //     + "?lang=" + locale;
             },
 
             replaceUrlParam(url, paramName, paramValue)

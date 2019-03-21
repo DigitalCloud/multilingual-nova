@@ -10856,12 +10856,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         redirect: function redirect(locale) {
             window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
-            // console.log(locale);
-            // window.location = Nova.config.base
-            //     + "/resources/"
-            //     + this.resourceName + "/"
-            //     + this.field.value.id + "/edit"
-            //     + "?lang=" + locale;
         },
         replaceUrlParam: function replaceUrlParam(url, paramName, paramValue) {
             if (paramValue == null) {
