@@ -11,3 +11,9 @@
   color: black;
   font-weight: normal;
 }
+
+.btn-selected {
+  outline: none;
+  -webkit-box-shadow: 0 0 8px var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
