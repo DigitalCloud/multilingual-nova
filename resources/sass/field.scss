@@ -6,14 +6,26 @@
   font-size: 12px;
 }
 
-.btn-secondary {
-  background-color: #c4c5d6;
-  color: black;
+.btn-translated {
+  background-color: #c0e3ff;
+  color: white;
   font-weight: normal;
 }
 
-.btn-selected {
-  outline: none;
-  -webkit-box-shadow: 0 0 8px var(--primary);
-  box-shadow: 0 0 8px var(--primary);
+.btn-untranslated {
+  background-color: #ffc8c8;
+  color: white;
+  font-weight: normal;
+}
+
+.btn-translated-selected {
+  background-color: #4099de;
+  color: white;
+  font-weight: normal;
+}
+
+.btn-untranslated-selected {
+  background-color: #ff8787;
+  color: white;
+  font-weight: normal;
 }
