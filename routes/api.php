@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
  Route::get('/current-local', 'Digitalcloud\MultilingualNova\Http\Controllers\LanguageController@currentLocal');
- Route::get('/remove-local/{locale}', 'Digitalcloud\MultilingualNova\Http\Controllers\LanguageController@removeLocal');
+ Route::delete('/remove-local/{locale}', 'Digitalcloud\MultilingualNova\Http\Controllers\LanguageController@removeLocal');
