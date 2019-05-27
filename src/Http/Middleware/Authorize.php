@@ -2,7 +2,7 @@
 
 namespace Digitalcloud\MultilingualNova\Http\Middleware;
 
-use DigitalCloud\MultilingualNova\NovaLanguageTool;
+use Digitalcloud\MultilingualNova\NovaLanguageTool;
 
 class Authorize
 {
