@@ -2,6 +2,7 @@
 
 namespace Digitalcloud\MultilingualNova;
 
+use Illuminate\Support\Facades\App;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -23,7 +24,7 @@ class Multilingual extends Field
         }, $this->getSupportLocales());
 
         $this->setLocales($locales);
-
+        $this->withMeta(['url' => config('nova.path')]);
     }
 
     public function fill(NovaRequest $request, $model)
@@ -33,13 +34,22 @@ class Multilingual extends Field
 
     protected function resolveAttribute($resource, $attribute)
     {
+        $localeCurrent = App::getLocale();
+
         $locales = $this->getLocales();
         $result = [];
         foreach ($locales as $key => $locale) {
+            $isTranslated = false;
+            foreach($resource->getTranslatableAttributes() as $value) {
+                $isTranslated = in_array($key, array_keys($resource->getTranslations($value)));
+                if($isTranslated) break;
+            }
+
             $result[] = [
                 'label' => $locale,
                 'value' => $key,
-                'translated' => in_array($key, array_keys($resource->getTranslations($resource->getTranslatableAttributes()[0])))
+                'selected' => ($localeCurrent === $key) ? true : false,
+                'translated' => $isTranslated
             ];
         }
 

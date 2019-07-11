@@ -10859,40 +10859,27 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LanguageUI__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LanguageUI___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LanguageUI__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixin_global__ = __webpack_require__(36);
 //
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: ['resourceName', 'field'],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixin_global__["a" /* global */]],
     components: {
         LanguageUI: __WEBPACK_IMPORTED_MODULE_0__LanguageUI___default.a
-    },
-    methods: {
-        redirect: function redirect(locale) {
-            window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
-        },
-        replaceUrlParam: function replaceUrlParam(url, paramName, paramValue) {
-            if (paramValue == null) {
-                paramValue = '';
-            }
-            var pattern = new RegExp('\\b(' + paramName + '=).*?(&|#|$)');
-            if (url.search(pattern) >= 0) {
-                return url.replace(pattern, '$1' + paramValue + '$2');
-            }
-            url = url.replace(/[?#]$/, '');
-            return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
-        }
     },
     mounted: function mounted() {
         if (this.field.value.style == 'list' || this.field.value.style == 'mix' && this.field.value.locales.length > this.field.value.convert_to_list_after) {
             var locales = this.field.value.locales;
             locales.map(function (item) {
-                if (item.translated) item.label += " -translated";
+                if (item.translated) item.label += " - translated";
                 return item;
             });
             Object.assign(this.field, { "options": this.field.value.locales });
@@ -10940,57 +10927,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ["field"],
+    props: ["field"],
 
-	data: function data() {
-		return {
-			selectedLocale: window.config.currentLocal
-		};
-	},
-	computed: {
-		translatedCount: function translatedCount() {
-			var count = 0;
-			this.field.value.locales.forEach(function (locale) {
-				if (locale.translated) {
-					count++;
-				}
-			});
+    data: function data() {
+        return {
+            selectedLocale: window.config.currentLocal
+        };
+    },
+    computed: {
+        translatedCount: function translatedCount() {
+            var count = 0;
+            this.field.value.locales.forEach(function (locale) {
+                if (locale.translated) {
+                    count++;
+                }
+            });
 
-			return count;
-		}
-	}
+            return count;
+        }
+    }
 });
 
 /***/ }),
@@ -11004,34 +10961,37 @@ var render = function() {
   return _c("div", [
     this.field.value.style == "button" ||
     (this.field.value.style == "mix" &&
-      this.field.value.locales.length <= this.field.value.convert_to_list_after)
+      _vm.locals.length <= this.field.value.convert_to_list_after)
       ? _c(
           "div",
-          _vm._l(this.field.value.locales, function(locale) {
-            return _c("div", { staticClass: "block mb-2" }, [
+          _vm._l(this.field.value.locales, function(local) {
+            return _c("span", { staticClass: " mb-2" }, [
               _c(
                 "a",
                 {
                   class:
                     "btn btn-lang btn-default " +
-                    (locale.translated ? "btn-primary" : "btn-secondary"),
+                    (local.translated
+                      ? "btn-translated" + (local.selected ? "-selected" : "")
+                      : "btn-untranslated" +
+                        (local.selected ? "-selected" : "")),
                   attrs: {
                     title:
-                      (locale.translated ? "Translated" : "Untranslated") +
+                      (local.translated ? "Translated" : "Untranslated") +
                       " Language",
                     href: "#"
                   },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      return _vm.$emit("change", locale.value)
+                      return _vm.$emit("change", local.value)
                     }
                   }
                 },
-                [_vm._v("\n\t\t\t\t" + _vm._s(locale.label) + "\n\t\t\t")]
+                [_vm._v(_vm._s(local.label))]
               ),
               _vm._v(" "),
-              locale.translated && _vm.translatedCount > 1
+              local.translated && _vm.translatedCount > 1
                 ? _c(
                     "a",
                     {
@@ -11040,11 +11000,11 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$emit("delete", locale.value)
+                          return _vm.$emit("delete", local.value)
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [_vm._v("\n                Delete\n            ")]
                   )
                 : _vm._e()
             ])
@@ -11056,7 +11016,7 @@ var render = function() {
     this.field.value.style == "list" ||
     (this.field.value.style == "mix" &&
       this.field.value.locales.length > this.field.value.convert_to_list_after)
-      ? _c("div", {}, [
+      ? _c("div", [
           _c(
             "select",
             {
@@ -11070,7 +11030,7 @@ var render = function() {
               ],
               staticClass: "w-full form-control form-select",
               class: _vm.errorClasses,
-              attrs: { id: _vm.field.name },
+              attrs: { id: _vm.field.name, placeholder: _vm.field.name },
               on: {
                 change: [
                   function($event) {
@@ -11092,9 +11052,9 @@ var render = function() {
                 ]
               }
             },
-            _vm._l(this.field.value.locales, function(option) {
-              return _c("option", { domProps: { value: option.value } }, [
-                _vm._v("\n\t\t\t\t" + _vm._s(option.label) + "\n\t\t\t")
+            _vm._l(this.field.value.locales, function(local) {
+              return _c("option", { domProps: { value: local.value } }, [
+                _vm._v(_vm._s(local.label))
               ])
             }),
             0
@@ -11191,6 +11151,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LanguageUI__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LanguageUI___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LanguageUI__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixin_global__ = __webpack_require__(36);
 //
 //
 //
@@ -11203,40 +11164,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ["resource", "resourceName", "resourceId", "field"],
-	components: {
-		LanguageUI: __WEBPACK_IMPORTED_MODULE_0__LanguageUI___default.a
-	},
-	methods: {
-		redirect: function redirect(locale) {
-			if (locale !== undefined) {
-				window.location = this.field.value.id + "?lang=" + locale;
-				return;
-			}
-
-			window.location = this.field.value.id;
-		},
-		deleteLocale: function deleteLocale(locale) {
-			Nova.request().post("/nova-vendor/multilingual-nova/remove-local/" + locale + "?resourceId=" + this.resourceId + "&resourceName=" + this.resourceName, {
-				_method: "DELETE"
-			});
-			this.redirect();
-		}
-	},
-	mounted: function mounted() {
-		if (this.field.value.style == "list" || this.field.value.style == "mix" && this.field.value.locales.length > this.field.value.convert_to_list_after) {
-			var locales = this.field.value.locales;
-			locales.map(function (item) {
-				if (item.translated) item.label += " -translated";
-				return item;
-			});
-			Object.assign(this.field, { options: this.field.value.locales });
-		}
-	}
+    props: ["resource", "resourceName", "resourceId", "field"],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixin_global__["a" /* global */]],
+    components: {
+        LanguageUI: __WEBPACK_IMPORTED_MODULE_0__LanguageUI___default.a
+    },
+    mounted: function mounted() {
+        if (this.field.value.style == "list" || this.field.value.style == "mix" && this.field.value.locales.length > this.field.value.convert_to_list_after) {
+            var locales = this.field.value.locales;
+            locales.map(function (item) {
+                if (item.translated) item.label += " -translated";
+                return item;
+            });
+            Object.assign(this.field, { options: this.field.value.locales });
+        }
+    }
 });
 
 /***/ }),
@@ -11326,6 +11273,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixin_global__ = __webpack_require__(36);
 //
 //
 //
@@ -11348,71 +11296,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1__mixin_global__["a" /* global */]],
 
     props: ['resourceName', 'resourceId', 'field'],
 
     data: function data() {
         return {
             currentLocal: window.config.currentLocal,
-            locals: window.config.locals
+            locals: window.config.locals,
+            fields: [],
+            isEditing: false
         };
-    },
-
-    methods: {
-        changeLocal: function changeLocal() {
-            window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
-        },
-        localClicked: function localClicked(local) {
-            this.currentLocal = local;
-            window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
-        },
-
-        /*
-         * Set the initial, internal value for the field.
-         */
-        setInitialValue: function setInitialValue() {
-            this.value = this.currentLocal || '';
-        },
-
-
-        /**
-         * Fill the given FormData object with the field's internal value.
-         */
-        fill: function fill(formData) {
-            formData.append(this.field.attribute, this.value || '');
-        },
-
-
-        /**
-         * Update the field's internal value.
-         */
-        handleChange: function handleChange(value) {
-            this.value = value;
-        },
-        replaceUrlParam: function replaceUrlParam(url, paramName, paramValue) {
-            if (paramValue == null) {
-                paramValue = '';
-            }
-            var pattern = new RegExp('\\b(' + paramName + '=).*?(&|#|$)');
-            if (url.search(pattern) >= 0) {
-                return url.replace(pattern, '$1' + paramValue + '$2');
-            }
-            url = url.replace(/[?#]$/, '');
-            return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
-        }
     },
 
     created: function created() {
@@ -11422,14 +11321,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
+        var _this = this;
+
         if (this.field.value.style == 'list' || this.field.value.style == 'mix' && this.field.value.locales.length > this.field.value.convert_to_list_after) {
             var locales = this.field.value.locales;
             locales.map(function (item) {
-                if (item.translated) item.label += " -translated";
+                if (item.translated) item.label += " - translated";
                 return item;
             });
             Object.assign(this.field, { "options": this.field.value.locales });
         }
+        this.isEditing = false;
+
+        this.$parent.$children.forEach(function (component) {
+            if (component.field !== undefined) {
+                component.$watch('value', function (value) {
+                    value = value.replace('<div><br></div>', '');
+                    component.field.value = component.field.value.replace('<div><br></div>', '');
+                    if (component.field.value !== value) {
+                        _this.isEditing = true;
+                    }
+                });
+            }
+        });
     }
 });
 
@@ -11457,7 +11371,10 @@ var render = function() {
                   {
                     class:
                       "btn btn-lang btn-default " +
-                      (local.translated ? "btn-primary" : "btn-secondary"),
+                      (local.translated
+                        ? "btn-translated" + (local.selected ? "-selected" : "")
+                        : "btn-untranslated" +
+                          (local.selected ? "-selected" : "")),
                     attrs: {
                       title:
                         (local.translated ? "Translated" : "Untranslated") +
@@ -12898,6 +12815,77 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return global; });
+var global = {
+    methods: {
+        redirect: function redirect(locale) {
+            window.location = this.replaceUrlParam(this.field.url + '/resources/' + this.resourceName + "/" + this.field.value.id + "/edit", 'lang', locale);
+        },
+        replaceUrlParam: function replaceUrlParam(url, paramName, paramValue) {
+            if (paramValue == null) {
+                paramValue = '';
+            }
+            var pattern = new RegExp('\\b(' + paramName + '=).*?(&|#|$)');
+            if (url.search(pattern) >= 0) {
+                return url.replace(pattern, '$1' + paramValue + '$2');
+            }
+            url = url.replace(/[?#]$/, '');
+            return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+        },
+        changeLocal: function changeLocal() {
+            window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
+        },
+        localClicked: function localClicked(local) {
+            if (this.isEditing) {
+                if (confirm('Are you sure you want to leave the page without saving?')) {
+                    this.currentLocal = local;
+                    window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
+                }
+            } else {
+                this.currentLocal = local;
+                window.location = this.replaceUrlParam(window.location.href, 'lang', this.currentLocal);
+            }
+        },
+
+        /*
+         * Set the initial, internal value for the field.
+         */
+        setInitialValue: function setInitialValue() {
+            this.value = this.currentLocal || '';
+        },
+
+
+        /**
+         * Fill the given FormData object with the field's internal value.
+         */
+        fill: function fill(formData) {
+            formData.append(this.field.attribute, this.value || '');
+        },
+
+
+        /**
+         * Update the field's internal value.
+         */
+        handleChange: function handleChange(value) {
+            this.value = value;
+        },
+        deleteLocale: function deleteLocale(locale) {
+            Nova.request().post("/nova-vendor/multilingual-nova/remove-local/" + locale + "?resourceId=" + this.resourceId + "&resourceName=" + this.resourceName, {
+                _method: "DELETE"
+            });
+            this.redirect();
+        }
+    }
+};
 
 /***/ })
 /******/ ]);
