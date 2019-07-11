@@ -39,11 +39,17 @@ class Multilingual extends Field
         $locales = $this->getLocales();
         $result = [];
         foreach ($locales as $key => $locale) {
+            $isTranslated = false;
+            foreach($resource->getTranslatableAttributes() as $value) {
+                $isTranslated = in_array($key, array_keys($resource->getTranslations($value)));
+                if($isTranslated) break;
+            }
+            
             $result[] = [
                 'label' => $locale,
-                'value' => $key,
-                'translated' => in_array($key, array_keys($resource->getTranslations($resource->getTranslatableAttributes()[0]))),
+                'value' => $key,               
                 'selected' => ($localeCurrent === $key) ? true : false,
+                'translated' => $isTranslated
             ];
         }
 
