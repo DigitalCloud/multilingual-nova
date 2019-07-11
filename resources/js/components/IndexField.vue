@@ -1,5 +1,5 @@
 <template>
-    <language-u-i :field="field" v-on:change="redirect"/>
+    <language-u-i :field="field" v-on:change="redirect" v-on:delete="deleteLocale"/>
 </template>
 
 <script>

@@ -11083,7 +11083,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("language-u-i", {
     attrs: { field: _vm.field },
-    on: { change: _vm.redirect }
+    on: { change: _vm.redirect, delete: _vm.deleteLocale }
   })
 }
 var staticRenderFns = []
@@ -12879,10 +12879,10 @@ var global = {
             this.value = value;
         },
         deleteLocale: function deleteLocale(locale) {
-            Nova.request().post("/nova-vendor/multilingual-nova/remove-local/" + locale + "?resourceId=" + this.resourceId + "&resourceName=" + this.resourceName, {
+            Nova.request().post("/nova-vendor/multilingual-nova/remove-local/" + locale + "?resourceId=" + this.field.value.id + "&resourceName=" + this.resourceName, {
                 _method: "DELETE"
             });
-            this.redirect();
+            window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
         }
     }
 };

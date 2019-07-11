@@ -57,14 +57,14 @@ export const global = {
                 "/nova-vendor/multilingual-nova/remove-local/" +
                 locale +
                 "?resourceId=" +
-                this.resourceId +
+                this.field.value.id +
                 "&resourceName=" +
                 this.resourceName,
                 {
                     _method: "DELETE"
                 }
             );
-            this.redirect();
+            window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
         }
     }
 }
