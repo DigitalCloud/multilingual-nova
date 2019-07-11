@@ -1,1 +1,31 @@
-.btn-lang{margin-left:.3rem;padding-left:1rem;padding-right:1rem;font-size:12px}.btn-translated{background-color:#c0e3ff;color:#fff;font-weight:400}.btn-untranslated{background-color:#ffc8c8;color:#fff;font-weight:400}.btn-translated-selected{background-color:#4099de;color:#fff;font-weight:400}.btn-untranslated-selected{background-color:#ff8787;color:#fff;font-weight:400}
+.btn-lang {
+  margin-left: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 12px;
+}
+
+.btn-translated {
+  background-color: #c0e3ff;
+  color: white;
+  font-weight: normal;
+}
+
+.btn-untranslated {
+  background-color: #ffc8c8;
+  color: white;
+  font-weight: normal;
+}
+
+.btn-translated-selected {
+  background-color: #4099de;
+  color: white;
+  font-weight: normal;
+}
+
+.btn-untranslated-selected {
+  background-color: #ff8787;
+  color: white;
+  font-weight: normal;
+}
+

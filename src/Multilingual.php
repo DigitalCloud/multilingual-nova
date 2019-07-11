@@ -24,7 +24,7 @@ class Multilingual extends Field
         }, $this->getSupportLocales());
 
         $this->setLocales($locales);
-
+        $this->withMeta(['url' => config('nova.path')]);
     }
 
     public function fill(NovaRequest $request, $model)
@@ -44,10 +44,10 @@ class Multilingual extends Field
                 $isTranslated = in_array($key, array_keys($resource->getTranslations($value)));
                 if($isTranslated) break;
             }
-            
+
             $result[] = [
                 'label' => $locale,
-                'value' => $key,               
+                'value' => $key,
                 'selected' => ($localeCurrent === $key) ? true : false,
                 'translated' => $isTranslated
             ];

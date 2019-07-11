@@ -8,17 +8,13 @@
 
 <script>
     import LanguageUI from './LanguageUI'
+    import {global} from '../mixin/global'
 
     export default {
         props: ['resource', 'resourceName', 'resourceId', 'field'],
+        mixins: [global],
         components: {
             LanguageUI
-        },
-        methods: {
-            redirect(locale) {
-                window.location = this.field.value.id
-                    + "?lang=" + locale;
-            }
         },
         mounted() {
             if (this.field.value.style == 'list' || (this.field.value.style == 'mix' && this.field.value.locales.length > this.field.value.convert_to_list_after)) {
