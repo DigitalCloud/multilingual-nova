@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="multilingual-nova">
         <div v-if="this.field.value.style=='button' || (this.field.value.style=='mix' && locals.length <= this.field.value.convert_to_list_after)">
             <span v-for="local in this.field.value.locales" class=" mb-2">
                 <a :title=" (local.translated?'Translated':'Untranslated')+' Language'"
@@ -8,7 +8,7 @@
 
                 <a href="" v-if="local.translated && translatedCount > 1"
                    @click.prevent="$emit('delete', local.value)"
-                   class="text-primary no-underline text-xs">
+                   class="text-primary no-underline text-xs link-delete-translated">
                     Delete
                 </a>
             </span>
