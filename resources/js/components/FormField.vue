@@ -60,7 +60,7 @@
                 if (component.field !== undefined) {
                     component.$watch('value', (value) => {
                         value = value.replace && value.replace('<div><br></div>', '');
-                        component.field.value = component.field.value.replace && component.field.value.replace('<div><br></div>', '');
+                        component.field.value = component.field.value && component.field.value.replace && component.field.value.replace('<div><br></div>', '');
                         if (component.field.value !== value) {
                             this.isEditing = true;
                         }
