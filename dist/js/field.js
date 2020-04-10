@@ -10971,6 +10971,7 @@ var render = function() {
                 {
                   class:
                     "btn btn-lang btn-default " +
+		    "btn-language-" + local.value + ' ' +
                     (local.translated
                       ? "btn-translated" + (local.selected ? "-selected" : "")
                       : "btn-untranslated" +
@@ -11371,6 +11372,7 @@ var render = function() {
                   {
                     class:
                       "btn btn-lang btn-default " +
+		      "btn-language-" + local.value + ' ' +
                       (local.translated
                         ? "btn-translated" + (local.selected ? "-selected" : "")
                         : "btn-untranslated" +
