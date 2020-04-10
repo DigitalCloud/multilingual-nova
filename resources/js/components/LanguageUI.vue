@@ -3,7 +3,7 @@
         <div v-if="this.field.value.style=='button' || (this.field.value.style=='mix' && locals.length <= this.field.value.convert_to_list_after)">
             <span v-for="local in this.field.value.locales" class=" mb-2">
                 <a :title=" (local.translated?'Translated':'Untranslated')+' Language'"
-                   :class="'btn btn-lang btn-default '+  (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
+                   :class="'btn btn-lang btn-default ' + 'btn-language-' + local.value + ' ' +  (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
                    href="#" @click.prevent="$emit('change', local.value)">{{local.label}}</a>
 
                 <a href="" v-if="local.translated && translatedCount > 1"
