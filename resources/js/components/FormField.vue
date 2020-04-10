@@ -4,7 +4,7 @@
             <div v-if="this.field.value.style=='button' || (this.field.value.style=='mix' && locals.length <= this.field.value.convert_to_list_after)">
                 <a v-for="local in locals"
                    :title=" (local.translated?'Translated':'Untranslated')+' Language'"
-                   :class="'btn btn-lang btn-default '+  (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
+                   :class="'btn btn-lang btn-default '+  'btn-language-' + local.value + ' ' + (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
                    href="#" @click.prevent="localClicked(local.value)">{{local.label}}</a>
             </div>
 
