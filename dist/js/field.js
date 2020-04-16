@@ -11337,8 +11337,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.$parent.$children.forEach(function (component) {
             if (component.field !== undefined) {
                 component.$watch('value', function (value) {
-                    value = value.replace('<div><br></div>', '');
-                    component.field.value = component.field.value.replace('<div><br></div>', '');
+                    value = value.replace && value.replace('<div><br></div>', '');
+                    component.field.value = component.field.value && component.field.value.replace && component.field.value.replace('<div><br></div>', '');
                     if (component.field.value !== value) {
                         _this.isEditing = true;
                     }
