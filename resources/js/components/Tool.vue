@@ -1,6 +1,6 @@
 <template>
     <div>
-        <heading class="mb-6">Nova Language Tool</heading>
+        <heading class="mb-6">{{ __('Language') }}</heading>
 
         <card class="flex  p-3">
             <div class="flex border-b border-40 w-full" >
