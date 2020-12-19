@@ -64,7 +64,7 @@ return [
 
 
 optionally, add middleware to `config/nova.php` 
-so the translations are loaded are also loaded on page refresh
+so the translations also loaded on page refresh
 ```php
 // in config/nova.php
 'middleware' => [
