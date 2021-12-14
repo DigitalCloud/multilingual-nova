@@ -4,12 +4,11 @@
             <div v-if="this.field.value.style=='button' || (this.field.value.style=='mix' && locals.length <= this.field.value.convert_to_list_after)">
                 <a v-for="local in locals"
                    :title=" (local.translated?'Translated':'Untranslated')+' Language'"
-                   :class="'btn btn-lang btn-default '+  (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
+                   :class="'btn btn-lang btn-default '+  'btn-language-' + local.value + ' ' + (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
                    href="#" @click.prevent="localClicked(local.value)">{{local.label}}</a>
             </div>
 
-            <div
-                    v-if="this.field.value.style=='list' || (this.field.value.style=='mix' && locals.length > this.field.value.convert_to_list_after)">
+            <div v-if="this.field.value.style=='list' || (this.field.value.style=='mix' && locals.length > this.field.value.convert_to_list_after)">
                 <select :id="field.name" v-model="currentLocal" class="w-full form-control form-select"
                         :class="errorClasses" :placeholder="field.name" v-on:change="changeLocal">
                     <option v-for="local in locals" :value="local.value">{{ local.label }}</option>
@@ -59,8 +58,15 @@
             this.$parent.$children.forEach(component => {
                 if (component.field !== undefined) {
                     component.$watch('value', (value) => {
-                        value = value.replace('<div><br></div>', '');
-                        component.field.value = component.field.value.replace('<div><br></div>', '');
+
+                        value = (typeof value === 'string')
+                            ? value.replace && value.replace('<div><br></div>', '')
+                            : value;
+
+                        component.field.value = (typeof component.field.value === 'string')
+                            ? component.field.value.replace('<div><br></div>', '')
+                            : component.field.value;
+
                         if (component.field.value !== value) {
                             this.isEditing = true;
                         }
