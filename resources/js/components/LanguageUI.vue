@@ -9,7 +9,7 @@
                 <a href="" v-if="local.translated && translatedCount > 1"
                    @click.prevent="$emit('delete', local.value)"
                    class="text-primary no-underline text-xs">
-                    Delete
+                  {{ __('Delete') }}
                 </a>
             </span>
     </div>
