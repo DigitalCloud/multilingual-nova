@@ -12,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
 class FieldServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application service.
+     * Bootstrap any application services.
      *
      * @return void
      */
