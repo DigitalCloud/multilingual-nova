@@ -43,8 +43,6 @@ jobs:
         with:
           path: vendor
           key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
 
       - name: Install Dependencies
         if: steps.vendor-cache.outputs.cache-hit != 'true'
