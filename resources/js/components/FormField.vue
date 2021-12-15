@@ -2,16 +2,20 @@
     <default-field :field="field">
         <template slot="field">
             <div v-if="this.field.value.style=='button' || (this.field.value.style=='mix' && locals.length <= this.field.value.convert_to_list_after)">
-                <a v-for="local in locals"
-                   :title=" (local.translated?'Translated':'Untranslated')+' Language'"
-                   :class="'btn btn-lang btn-default '+  'btn-language-' + local.value + ' ' + (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
-                   href="#" @click.prevent="localClicked(local.value)">{{local.label}}</a>
+                <span v-for="local in locals" :key="local.value" class=" mb-2 inline-flex">
+                    <a :title=" (local.translated?'Translated':'Untranslated')+' Language'"
+                        :class="'btn btn-lang btn-default ' + ((local.translated && translatedCount > 1) ? 'btn-with-delete ' : '') + 'btn-language-' + local.value + ' ' + (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
+                        href="#" @click.prevent="localClicked(local.value)">{{local.label}}</a>
+                    <a href="" v-if="local.translated && translatedCount > 1"
+                        @click.prevent="deleteLocale(local.value)"
+                        class="btn-delete">X</a>
+                </span>
             </div>
 
             <div v-if="this.field.value.style=='list' || (this.field.value.style=='mix' && locals.length > this.field.value.convert_to_list_after)">
                 <select :id="field.name" v-model="currentLocal" class="w-full form-control form-select"
                         :class="errorClasses" :placeholder="field.name" v-on:change="changeLocal">
-                    <option v-for="local in locals" :value="local.value">{{ local.label }}</option>
+                    <option v-for="local in locals" :key="local.label" :value="local.value">{{ local.label }}</option>
                 </select>
             </div>
 
@@ -58,7 +62,6 @@
             this.$parent.$children.forEach(component => {
                 if (component.field !== undefined) {
                     component.$watch('value', (value) => {
-
                         value = (typeof value === 'string')
                             ? value.replace && value.replace('<div><br></div>', '')
                             : value;
@@ -73,6 +76,18 @@
                     });
                 }
             });
+        },
+        computed: {
+            translatedCount() {
+                let count = 0;
+                this.field.value.locales.forEach(locale => {
+                    if (locale.translated) {
+                    count++;
+                    }
+                });
+
+                return count;
+            }
         }
     }
 </script>

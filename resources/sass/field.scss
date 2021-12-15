@@ -1,32 +1,66 @@
 // Nova Tool CSS
-.btn-lang {
+
+$btn-translated-background: #93c7ee;
+$btn-untranslated-background: #f095ac;
+
+
+.btn-default.btn-lang {
   margin-left: 0.3rem;
   margin-bottom: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 12px;
-}
-
-.btn-translated {
-  background-color: #c0e3ff;
+  height: 1.75rem;
+  line-height: 1.75rem;
   color: white;
   font-weight: 400;
 }
 
+.btn-delete {
+    height: 1.75rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.3rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    font-size: 9px;
+    color: white;
+    font-weight: normal;
+    border-radius: 0 4px 4px 0 !important;
+    text-decoration: none;
+}
+
+.btn-with-delete {
+    border-radius: 4px 0 0 4px !important;
+}
+
+.btn-translated {
+  background-color: $btn-translated-background;
+}
+
 .btn-untranslated {
-  background-color: #ffc8c8;
-  color: white;
-  font-weight: normal;
+  background-color: $btn-untranslated-background;;
 }
 
 .btn-translated-selected {
-  background-color: #4099de;
-  color: white;
-  font-weight: normal;
+  background-color: darken($btn-translated-background, 20%);
 }
 
 .btn-untranslated-selected {
-  background-color: #ff8787;
-  color: white;
-  font-weight: normal;
+  background-color: darken($btn-untranslated-background, 20%);
+}
+
+.btn-translated ~ .btn-delete {
+    background-color: darken($btn-translated-background, 10%);
+}
+
+.btn-translated ~ .btn-untranslated {
+    background-color: darken($btn-untranslated-background, 10%);
+}
+
+.btn-translated-selected ~ .btn-delete {
+    background-color: darken($btn-translated-background, 50%);
+}
+
+.btn-translated ~ .btn-untranslated-selected {
+    background-color: darken($btn-untranslated-background, 50%);
 }

@@ -14,8 +14,6 @@ class NovaLanguageTool extends Tool
      */
     public function boot()
     {
-//        Nova::script('nova-language-tool', __DIR__.'/../dist/js/tool.js');
-//        Nova::style('nova-language-tool', __DIR__.'/../dist/css/tool.css');
     }
 
     /**
@@ -27,8 +25,4 @@ class NovaLanguageTool extends Tool
     {
         return view('nova-language-tool::navigation');
     }
-
-
-
-
 }
