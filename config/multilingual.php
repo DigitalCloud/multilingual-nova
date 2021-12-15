@@ -35,6 +35,7 @@ return [
     /*
      * If you choose mix selection, you can define after how many languages should button convert to list
      *
+     *
      */
     'convert_to_list_after' => 3
 ];
