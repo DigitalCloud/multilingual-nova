@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         changeLocal() {
-            window.location = Nova.config.base + "/nova-language-tool?lang=" + this.currentLocal;
+            window.location = Nova.config.base + "/nova-language-tool?lang=ar" + this.currentLocal;
         },
 
         async initializeComponent() {

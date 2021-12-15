@@ -8,6 +8,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1.0",
+        "spatie/laravel-package-tools": "^1.9",
         "spatie/laravel-translatable": "^4.0"
     },
     "autoload": {

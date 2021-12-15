@@ -2,6 +2,7 @@
 
 namespace Digitalcloud\MultilingualNova;
 
+use Digitalcloud\MultilingualNova\Helper\MultilingualHelper;
 use Illuminate\Support\Facades\App;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -21,7 +22,7 @@ class Multilingual extends Field
 
         $locales = array_map(function ($value) {
             return __($value);
-        }, $this->getSupportLocales());
+        }, MultilingualHelper::getSupportLocales());
 
         $this->setLocales($locales);
         $this->withMeta(['url' => config('nova.path')]);
@@ -29,7 +30,7 @@ class Multilingual extends Field
 
     public function fill(NovaRequest $request, $model)
     {
-        return ;
+        return;
     }
 
     protected function resolveAttribute($resource, $attribute)
@@ -40,9 +41,9 @@ class Multilingual extends Field
         $result = [];
         foreach ($locales as $key => $locale) {
             $isTranslated = false;
-            foreach($resource->getTranslatableAttributes() as $value) {
+            foreach ($resource->getTranslatableAttributes() as $value) {
                 $isTranslated = in_array($key, array_keys($resource->getTranslations($value)));
-                if($isTranslated) break;
+                if ($isTranslated) break;
             }
 
             $result[] = [
@@ -71,21 +72,4 @@ class Multilingual extends Field
         return $this->meta()["locales"];
     }
 
-    private function getSupportLocales()
-    {
-        if (config('multilingual.source') == 'array') return config('multilingual.locales');
-
-        if (config('multilingual.source') == 'database') {
-            $model = config('multilingual.database.model');
-            $code = config('multilingual.database.code_field');
-            $label = config('multilingual.database.label_field');
-
-            $locales = ($model)::all()->mapWithKeys(function ($item) use ($code, $label) {
-                return [$item->$code => $item->$label];
-            });
-            return $locales->toArray();
-        }
-
-        return ['en' => 'EN'];
-    }
 }

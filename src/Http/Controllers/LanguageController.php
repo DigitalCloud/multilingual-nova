@@ -8,19 +8,19 @@ use Laravel\Nova\Nova;
 
 class LanguageController extends Controller
 {
-    public function index()
-    {
-    }
+    /**
+     * @return string
+     */
     public function currentLocal()
     {
         return App::getLocale();
     }
 
-    public function locals()
-    {
-        return App::getLocale();
-    }
-
+    /**
+     * @param Request $request
+     * @param $locale
+     * @return mixed
+     */
     public function removeLocal(Request $request, $locale)
     {
         $resourceClass = Nova::resourceForKey($request->get("resourceName"));
