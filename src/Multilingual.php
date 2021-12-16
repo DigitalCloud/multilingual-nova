@@ -30,7 +30,7 @@ class Multilingual extends Field
 
     public function fill(NovaRequest $request, $model)
     {
-        return;
+        return null;
     }
 
     protected function resolveAttribute($resource, $attribute)
@@ -43,7 +43,9 @@ class Multilingual extends Field
             $isTranslated = false;
             foreach ($resource->getTranslatableAttributes() as $value) {
                 $isTranslated = in_array($key, array_keys($resource->getTranslations($value)));
-                if ($isTranslated) break;
+                if ($isTranslated) {
+                    break;
+                }
             }
 
             $result[] = [

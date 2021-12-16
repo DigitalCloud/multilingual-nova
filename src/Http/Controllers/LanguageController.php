@@ -24,6 +24,7 @@ class LanguageController extends Controller
     public function removeLocal(Request $request, $locale)
     {
         $resourceClass = Nova::resourceForKey($request->get("resourceName"));
+
         if (!$resourceClass) {
             abort("Missing resource class");
         }

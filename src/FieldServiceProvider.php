@@ -29,9 +29,11 @@ class FieldServiceProvider extends PackageServiceProvider
 
         $lang = request('lang', request()->header('lang'));
 
-        if ($lang) app()->setLocale($lang);
+        if ($lang) {
+            app()->setLocale($lang);
+        }
 
-        Nova::serving(function (ServingNova $event) {
+        Nova::serving(function () {
             Nova::provideToScript(['locals' => MultilingualHelper::getSupportLocales(), 'currentLocal' => App::getLocale()]);
             Nova::script('multilingual-nova', __DIR__ . '/../dist/js/field.js');
             Nova::style('multilingual-nova', __DIR__ . '/../dist/css/field.css');
