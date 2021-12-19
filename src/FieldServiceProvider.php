@@ -6,7 +6,6 @@ use Digitalcloud\MultilingualNova\Helper\MultilingualHelper;
 use Digitalcloud\MultilingualNova\Http\Middleware\Authorize;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

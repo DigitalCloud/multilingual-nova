@@ -1,11 +1,12 @@
 <?php
 
-
 namespace Digitalcloud\MultilingualNova\Helper;
-
 
 class MultilingualHelper
 {
+    /**
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed|string[]
+     */
     public static function getSupportLocales()
     {
         if (config('multilingual.source') == 'array') {
@@ -14,7 +15,7 @@ class MultilingualHelper
 
         if (config('multilingual.source') == 'database') {
             $model = config('multilingual.database.model');
-            $code  = config('multilingual.database.code_field');
+            $code = config('multilingual.database.code_field');
             $label = config('multilingual.database.label_field');
 
             $locales = ($model)::all()->mapWithKeys(function ($item) use ($code, $label) {

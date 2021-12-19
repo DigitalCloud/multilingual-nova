@@ -2,7 +2,6 @@
 
 namespace Digitalcloud\MultilingualNova;
 
-use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
 class NovaLanguageTool extends Tool

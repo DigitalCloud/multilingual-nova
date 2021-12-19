@@ -28,11 +28,21 @@ class Multilingual extends Field
         $this->withMeta(['url' => config('nova.path')]);
     }
 
+    /**
+     * @param NovaRequest $request
+     * @param object $model
+     * @return null
+     */
     public function fill(NovaRequest $request, $model)
     {
         return null;
     }
 
+    /**
+     * @param mixed $resource
+     * @param string $attribute
+     * @return array
+     */
     protected function resolveAttribute($resource, $attribute)
     {
         $localeCurrent = App::getLocale();
@@ -64,11 +74,18 @@ class Multilingual extends Field
         ];
     }
 
+    /**
+     * @param array $locales
+     * @return Multilingual
+     */
     public function setLocales(array $locales)
     {
         return $this->withMeta(['locales' => $locales]);
     }
 
+    /**
+     * @return mixed
+     */
     public function getLocales()
     {
         return $this->meta()["locales"];
