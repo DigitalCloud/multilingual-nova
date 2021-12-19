@@ -53,18 +53,24 @@ export const global = {
         },
 
         deleteLocale(locale) {
-            Nova.request().post(
-                "/nova-vendor/multilingual-nova/remove-local/" +
-                locale +
-                "?resourceId=" +
-                this.field.value.id +
-                "&resourceName=" +
-                this.resourceName,
-                {
-                    _method: "DELETE"
-                }
-            );
-            window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
+            Nova
+                .request()
+                .post(
+                    "/nova-vendor/multilingual-nova/remove-local/" +
+                    locale +
+                    "?resourceId=" +
+                    this.field.value.id +
+                    "&resourceName=" +
+                    this.resourceName,
+                    {
+                        _method: "DELETE"
+                    }
+                )
+                .then((response) => {
+                    if (response.status === 200 && response.statusText === 'OK') {
+                        window.location = this.replaceUrlParam(window.location.href, 'lang', locale);
+                    }
+                });
         }
     }
 }

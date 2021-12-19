@@ -2,7 +2,7 @@
     <div class="p-3">
         <select v-model="currentLocal"  class="w-full form-control form-select"
                 v-on:change="changeLocal">
-            <option v-for="(value, key) in locals" :value="key">
+            <option v-for="(value, key) in locals" :key="value" :value="key">
                 {{ value }}
             </option>
         </select>

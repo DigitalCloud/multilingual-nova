@@ -8,21 +8,28 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-Nova.booting((Vue, router) => {
-    Vue.component('index-multilingual-nova', require('./components/IndexField'));
-    Vue.component('detail-multilingual-nova', require('./components/DetailField'));
-    Vue.component('form-multilingual-nova', require('./components/FormField'));
+import IndexField from './components/IndexField.vue';
+import DetailField from './components/DetailField.vue';
+import FormField from './components/FormField.vue';
+import LanguageSelector from './components/LanguageSelector.vue';
+import Tool from './components/Tool.vue';
 
-    Vue.component('language-selector', require('./components/LanguageSelector'));
+Nova.booting((Vue, router) => {
+    
+    Vue.component('index-multilingual-nova', IndexField);
+    Vue.component('detail-multilingual-nova', DetailField);
+    Vue.component('form-multilingual-nova', FormField);
+
+    Vue.component('language-selector', LanguageSelector);
 
     router.addRoutes([
         {
             name: 'nova-language-tool',
             path: '/nova-language-tool',
-            component: require('./components/Tool'),
+            component: Tool,
         },
-    ])
-
+    ]);
+    
     let lang = getParameterByName('lang');
     if (lang) {
         Nova.request().defaults.headers['lang'] = lang;
