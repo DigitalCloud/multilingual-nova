@@ -46,7 +46,8 @@ jobs:
 
       - name: Install Dependencies
         if: steps.vendor-cache.outputs.cache-hit != 'true'
-        run: composer config http-basic.nova.laravel.com ${{secrets.NOVA_USERNAME}} ${{secrets.NOVA_PASSWORD}} |
+        run:  |
+             composer config http-basic.nova.laravel.com ${{secrets.NOVA_USERNAME}} ${{secrets.NOVA_PASSWORD}}
              composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Update Dependencies with latest stable
@@ -54,8 +55,7 @@ jobs:
         run: composer update --prefer-stable
       - name: Update Dependencies with lowest stable
         if: matrix.dependency-stability == 'prefer-lowest'
-        run: composer config http-basic.nova.laravel.com ${{secrets.NOVA_USERNAME}} ${{secrets.NOVA_PASSWORD}} |
-             composer update --prefer-stable --prefer-lowest
+        run: composer update --prefer-stable --prefer-lowest
 
       - name: Show dir
         run: pwd
