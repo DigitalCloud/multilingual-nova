@@ -53,3 +53,10 @@ it('cant delete current local when resource id invalid', function () {
 
     assertEquals(json_decode($response->content())->message, messageError());
 });
+
+it('cant delete current local when resource name and id null', function () {
+
+    $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en');
+
+    assertEquals(json_decode($response->content())->message, messageError());
+});
