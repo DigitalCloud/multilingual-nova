@@ -20,7 +20,7 @@ function messageError()
     return 'Server Error';
 }
 
-it('delete current local', function () {
+it('delete local', function () {
 
     $resource = TestModel::create(['title' => ['en' => faker()->title, 'ar' => faker()->title]]);
 
@@ -32,7 +32,7 @@ it('delete current local', function () {
     assertTrue(json_decode($response->content())->status);
 });
 
-it('cant delete current local when resource name invalid', function () {
+it('cant delete local when resource name invalid', function () {
 
     $resource = TestModel::create(['title' => ['en' => faker()->title, 'ar' => faker()->title]]);
 
@@ -44,19 +44,12 @@ it('cant delete current local when resource name invalid', function () {
     assertEquals(json_decode($response->content())->message, messageError());
 });
 
-it('cant delete current local when resource id invalid', function () {
+it('cant delete local when resource id invalid', function () {
 
     $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en', [
         'resourceName' => 'test-models',
         'resourceId' => 0,
     ]);
-
-    assertEquals(json_decode($response->content())->message, messageError());
-});
-
-it('cant delete current local when resource name and id null', function () {
-
-    $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en');
 
     assertEquals(json_decode($response->content())->message, messageError());
 });
