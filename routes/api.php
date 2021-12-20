@@ -1,6 +1,7 @@
 <?php
 
-use Digitalcloud\MultilingualNova\Http\Controllers\LanguageController;
+use Digitalcloud\MultilingualNova\Http\Controllers\LanguageCurrentController;
+use Digitalcloud\MultilingualNova\Http\Controllers\LanguageDeleteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('current-local', [LanguageController::class, 'currentLocal']);
-Route::delete('remove-local/{locale}', [LanguageController::class, 'removeLocal']);
+Route::get('current-local', LanguageCurrentController::class);
+Route::delete('remove-local/{locale}', LanguageDeleteController::class);
