@@ -2,22 +2,29 @@
 
 namespace Digitalcloud\MultilingualNova;
 
+use Digitalcloud\MultilingualNova\Helper\MultilingualHelper;
 use Digitalcloud\MultilingualNova\Http\Middleware\Authorize;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
-use Illuminate\Support\ServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FieldServiceProvider extends ServiceProvider
+class FieldServiceProvider extends PackageServiceProvider
 {
+
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * @param Package $package
      */
-    public function boot()
+    public function configurePackage(Package $package): void
     {
+        $package->name('multilingual-nova')
+            ->hasConfigFile(['multilingual']);
+    }
+
+    public function bootingPackage()
+    {
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-language-tool');
 
         $lang = request('lang', request()->header('lang'));
@@ -26,16 +33,11 @@ class FieldServiceProvider extends ServiceProvider
             app()->setLocale($lang);
         }
 
-        Nova::serving(function (ServingNova $event) {
-            Nova::provideToScript(['locals' => $this->getSupportLocales(), 'currentLocal' => App::getLocale()]);
+        Nova::serving(function () {
+            Nova::provideToScript(['locals' => MultilingualHelper::getSupportLocales(), 'currentLocal' => App::getLocale()]);
             Nova::script('multilingual-nova', __DIR__ . '/../dist/js/field.js');
             Nova::style('multilingual-nova', __DIR__ . '/../dist/css/field.css');
         });
-
-        // Publish a config file
-        $this->publishes([
-            __DIR__ . '/../config/multilingual.php' => config_path('multilingual.php'),
-        ], 'config');
 
         $this->app->booted(function () {
             $this->routes();
@@ -43,15 +45,6 @@ class FieldServiceProvider extends ServiceProvider
 
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(__DIR__ . '/../config/multilingual.php', 'multilingual');
-    }
 
     protected function routes()
     {
@@ -64,22 +57,4 @@ class FieldServiceProvider extends ServiceProvider
             ->group(__DIR__ . '/../routes/api.php');
     }
 
-
-    private function getSupportLocales()
-    {
-        if (config('multilingual.source') == 'array') return config('multilingual.locales');
-
-        if (config('multilingual.source') == 'database') {
-            $model = config('multilingual.database.model');
-            $code = config('multilingual.database.code_field');
-            $label = config('multilingual.database.label_field');
-
-            $locales = ($model)::all()->mapWithKeys(function ($item) use ($code, $label) {
-                return [$item->$code => $item->$label];
-            });
-            return $locales->toArray();
-        }
-
-        return ['en' => 'EN'];
-    }
 }

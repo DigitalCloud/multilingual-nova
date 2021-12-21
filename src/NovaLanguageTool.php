@@ -2,7 +2,6 @@
 
 namespace Digitalcloud\MultilingualNova;
 
-use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
 
 class NovaLanguageTool extends Tool
@@ -14,6 +13,7 @@ class NovaLanguageTool extends Tool
      */
     public function boot()
     {
+        //
     }
 
     /**
@@ -25,4 +25,5 @@ class NovaLanguageTool extends Tool
     {
         return view('nova-language-tool::navigation');
     }
+
 }
