@@ -18,11 +18,13 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-language-tool');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-language-tool');
 
         $lang = request('lang', request()->header('lang'));
 
-        if ($lang) app()->setLocale($lang);
+        if ($lang) {
+            app()->setLocale($lang);
+        }
 
         Nova::serving(function (ServingNova $event) {
             Nova::provideToScript(['locals' => $this->getSupportLocales(), 'currentLocal' => App::getLocale()]);
@@ -48,7 +50,7 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/multilingual.php', 'multilingual');
+        $this->mergeConfigFrom(__DIR__ . '/../config/multilingual.php', 'multilingual');
     }
 
     protected function routes()
@@ -59,7 +61,7 @@ class FieldServiceProvider extends ServiceProvider
 
         Route::middleware(['nova', Authorize::class])
             ->prefix('nova-vendor/multilingual-nova')
-            ->group(__DIR__.'/../routes/api.php');
+            ->group(__DIR__ . '/../routes/api.php');
     }
 
 
