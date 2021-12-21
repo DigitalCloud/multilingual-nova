@@ -1,6 +1,16 @@
 # Multilingual Nova (using default nova fields)
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/digitalcloud/multilingual-nova.svg?style=flat-square)](https://packagist.org/packages/digitalcloud/multilingual-nova)
+[![Total Downloads](https://img.shields.io/packagist/dt/digitalcloud/multilingual-nova.svg?style=flat-square)](https://packagist.org/packages/digitalcloud/multilingual-nova)
+
 This package allows you to switch Nova language. Languages could be retrieved as array from config file or from database.
+
+### Requirements
+
+| Requirements | Version |
+|--------------|---------|
+| PHP          | ^8.0    |
+| Laravel      | ^8.0      |
 
 ### Installation
 
@@ -155,9 +165,23 @@ Alternatively, you can override the config locales using `setLocales(...)` funct
                   'de' => 'Deutsch',
             ]),
             // ...
-        ]
+        ];
     }
 ```
+
+### Testing
+
+```bash
+composer test
+```
+
+### Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Security Vulnerabilities
+
+Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
 
 ### Displaying Options
  

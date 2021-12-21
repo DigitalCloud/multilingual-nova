@@ -16,22 +16,18 @@ class LanguageDeleteController extends Controller
     {
         $resourceClass = Nova::resourceForKey($request->get("resourceName"));
 
-        if (!$resourceClass) {
-            abort("Missing resource class");
-        }
+        abort_if(!$resourceClass, "Missing resource class");
 
         $modelClass = $resourceClass::$model;
 
         $resource = $modelClass::find($request->get("resourceId"));
 
-        if (!$resource) {
-            abort("Missing resource");
-        }
+        abort_if(!$resource, "Missing resource");
 
         if ($resource->forgetAllTranslations($locale)->save()) {
             return response()->json(["status" => true]);
         }
 
-        abort("Error saving");
+        return response()->json(["status" => false]);
     }
 }

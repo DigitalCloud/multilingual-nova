@@ -12,12 +12,21 @@ abstract class TestCase extends Orchestra
 {
     use RefreshDatabase;
 
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
         $this->setUpDatabase();
     }
 
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     * @return string[]
+     */
     protected function getPackageProviders($app)
     {
         return [FieldServiceProvider::class];

@@ -61,7 +61,7 @@ class Multilingual extends Field
             $result[] = [
                 'label' => $locale,
                 'value' => $key,
-                'selected' => ($localeCurrent === $key) ? true : false,
+                'selected' => $localeCurrent === $key,
                 'translated' => $isTranslated
             ];
         }
