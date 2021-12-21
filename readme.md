@@ -11,6 +11,7 @@ This package allows you to switch Nova language. Languages could be retrieved as
 |--------------|---------|
 | PHP          | ^8.0    |
 | Laravel      | ^8.0      |
+| Laravel Nova      |  ~3.0      |
 
 ### Installation
 
@@ -122,7 +123,7 @@ In create and update page, the field allows you to change the language of inputs
 
 ### Model:
 
-You can add spatie translatable to your model.
+We use [Spatie laravel translatable](https://github.com/spatie/laravel-translatable)
 
 ```php
     use Spatie\Translatable\HasTranslations;
