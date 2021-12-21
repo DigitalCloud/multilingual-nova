@@ -2,7 +2,7 @@
     <div class="p-3">
         <select v-model="currentLocal"  class="w-full form-control form-select"
                 v-on:change="changeLocal">
-            <option v-for="(value, key) in locals" :value="key">
+            <option v-for="(value, key) in locals" :key="value" :value="key">
                 {{ value }}
             </option>
         </select>
@@ -39,9 +39,6 @@ export default {
                 .then(({ data }) => {
                     this.locals = data
                 })
-                .catch(error => {
-
-                })
         },
 
         getCurrentLocal() {
@@ -51,9 +48,6 @@ export default {
                 .then(({ data }) => {
                     this.currentLocal = data
                     this.loading = false
-                })
-                .catch(error => {
-
                 })
         },
 
@@ -71,16 +65,6 @@ export default {
             return url + (url.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
         }
 
-    },
-    created() {
-
-    },
-    mounted() {
-        // this.initializeComponent()
-    },
+    }
 }
 </script>
-
-<style>
-/* Scoped Styles */
-</style>

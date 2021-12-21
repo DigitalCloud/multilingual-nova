@@ -9,7 +9,7 @@
                 </div>
                 <div class="py-6 px-8 w-1/2">
                     <select v-model="currentLocal" id="language"  dusk="language"  :placeholder="__('Select Language')" class="w-full form-control form-select">
-                        <option v-for="(value, key) in locals" :value="key">
+                        <option v-for="(value, key) in locals" :key="value" :value="key">
                             {{ value }}
                         </option>
                     </select>
@@ -59,21 +59,8 @@ export default {
                     this.currentLocal = data
                     this.loading = false
                 })
-                .catch(error => {
-
-                })
         },
 
     },
-    created() {
-
-    },
-    mounted() {
-        // this.initializeComponent()
-    },
 }
 </script>
-
-<style>
-/* Scoped Styles */
-</style>

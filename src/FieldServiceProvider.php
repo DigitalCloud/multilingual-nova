@@ -24,6 +24,7 @@ class FieldServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nova-language-tool');
 
         $lang = request('lang', request()->header('lang'));
@@ -43,6 +44,7 @@ class FieldServiceProvider extends PackageServiceProvider
         });
 
     }
+
 
     protected function routes()
     {
