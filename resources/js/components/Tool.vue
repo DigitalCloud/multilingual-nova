@@ -59,21 +59,8 @@ export default {
                     this.currentLocal = data
                     this.loading = false
                 })
-                .catch(error => {
-
-                })
         },
 
     },
-    created() {
-
-    },
-    mounted() {
-        // this.initializeComponent()
-    },
 }
 </script>
-
-<style>
-/* Scoped Styles */
-</style>
