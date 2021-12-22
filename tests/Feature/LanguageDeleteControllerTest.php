@@ -15,6 +15,17 @@ beforeEach(function () {
     Nova::resources(['test-models' => TestNova::class]);
 });
 
+/**
+ * @return string
+ */
+function baseUrl()
+{
+    return 'nova-vendor/multilingual-nova/remove-local/en';
+}
+
+/**
+ * @return string
+ */
 function messageError()
 {
     return 'Server Error';
@@ -24,7 +35,7 @@ it('delete local', function () {
 
     $resource = TestModel::create(['title' => ['en' => faker()->title, 'ar' => faker()->title]]);
 
-    $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en', [
+    $response = deleteJson(baseUrl(), [
         'resourceName' => 'test-models',
         'resourceId' => $resource->id,
     ]);
@@ -36,7 +47,7 @@ it('cant delete local when resource name invalid', function () {
 
     $resource = TestModel::create(['title' => ['en' => faker()->title, 'ar' => faker()->title]]);
 
-    $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en', [
+    $response = deleteJson(baseUrl(), [
         'resourceName' => 'test',
         'resourceId' => $resource->id,
     ]);
@@ -46,7 +57,7 @@ it('cant delete local when resource name invalid', function () {
 
 it('cant delete local when resource id invalid', function () {
 
-    $response = deleteJson('nova-vendor/multilingual-nova/remove-local/en', [
+    $response = deleteJson(baseUrl(), [
         'resourceName' => 'test-models',
         'resourceId' => 0,
     ]);
