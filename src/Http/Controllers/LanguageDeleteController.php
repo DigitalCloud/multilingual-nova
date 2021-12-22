@@ -25,9 +25,9 @@ class LanguageDeleteController extends Controller
         abort_if(!$resource, "Missing resource");
 
         if ($resource->forgetAllTranslations($locale)->save()) {
-            return response()->json(["status" => true]);
+            return response()->json(['status' => true]);
         }
 
-        return response()->json(["status" => false]);
+        return response()->json(['status' => false]);
     }
 }
