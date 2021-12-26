@@ -6,7 +6,7 @@
                 :class="'btn btn-lang btn-default ' + ((local.translated && translatedCount > 1) ? 'btn-with-delete ' : '') + 'btn-language-' + local.value + ' ' +  (local.translated ?  'btn-translated' + (local.selected?'-selected':'') :'btn-untranslated' + (local.selected?'-selected':''))"
                 href="#" @click.prevent="$emit('change', local.value)">{{local.label}}</a>
             <a href="" v-if="local.translated && translatedCount > 1"
-                @click.prevent="$emit('delete', local.value)"
+               @click.prevent="openRemoveModal(local.value)"
                 class="btn-delete">X</a>
         </span>
     </div>
@@ -17,6 +17,16 @@
         <option v-for="local in this.field.value.locales" :key="local.value" :value="local.value">{{ local.label }}</option>
       </select>
     </div>
+
+    <portal to="modals" transition="fade-transition">
+      <component
+          v-if="removeModalOpen"
+          class="text-left"
+          is="delete-resource-modal"
+          @confirm="confirmDelete"
+          @close="closeRemoveModal"
+      />
+    </portal>
   </div>
 </template>
 
@@ -26,7 +36,9 @@ export default {
 
   data: function () {
     return {
-      selectedLocale: window.config.currentLocal
+      selectedLocale: window.config.currentLocal,
+      removeModalOpen: false,
+      deletedItem: null,
     };
   },
   computed: {
@@ -40,6 +52,19 @@ export default {
 
       return count;
     }
+  },
+  methods: {
+    openRemoveModal(value) {
+      this.removeModalOpen = true;
+      this.deletedItem = value;
+    },
+    closeRemoveModal() {
+      this.removeModalOpen = false;
+      this.deletedItem = null;
+    },
+    confirmDelete() {
+      this.$emit('delete', this.deletedItem);
+    },
   }
 };
 </script>
