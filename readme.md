@@ -9,9 +9,9 @@ This package allows you to switch Nova language. Languages could be retrieved as
 
 | Requirements | Version |
 |--------------|---------|
-| PHP          | ^8.0    |
-| Laravel      | ^8.0      |
-| Laravel Nova      |  ~3.0      |
+| PHP          | ^8.0+   |
+| Laravel      | ^8.0, 9 |
+| Laravel Nova |  ~3.0   |
 
 ### Installation
 
