@@ -76,6 +76,23 @@ return [
 ];
 ```
 
+
+optionally, add middleware to `config/nova.php` 
+so the translations also loaded on page refresh
+```php
+// in config/nova.php
+'middleware' => [
+    ...
+    // This must be added before the `DispatchServingNovaEvent` so the dashboard translations
+    // are correctly loaded before the nova elements initialization
+    \Digitalcloud\MultilingualNova\Http\Middleware\InitializeLanguage::class,
+    ...
+    DispatchServingNovaEvent::class, // make sure you are not calling this twice 
+    ...
+],
+```
+
+
 ## Usage
 
 ### Nova Language Tool

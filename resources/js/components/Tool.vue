@@ -42,7 +42,19 @@ export default {
     },
     methods: {
         changeLocal() {
-            window.location = Nova.config.base + "/nova-language-tool?lang=ar" + this.currentLocal;
+            const fd = new FormData();
+            fd.append('lang', this.currentLocal);
+            axios.post('/nova-vendor/multilingual-nova/current-local', fd )
+                .then(({ data }) => {
+                    console.log(data);
+                    // TODO display a successful message
+                    window.location = Nova.config.base + "/nova-language-tool?lang=" + this.currentLocal;
+                })
+                .catch(error => {
+                    //TODO display an error message
+                    console.log(error)
+                });
+
         },
 
         async initializeComponent() {
